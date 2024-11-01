@@ -1,21 +1,33 @@
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #5865F2;
+  --color-accent: #FEE75C;
+  --color-background: #EDEDED;
+  --color-dark: #23272A;
+  --color-text-secondary: #99AAB5;
+  --color-hover: #7289DA;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-[#EDEDED] text-[#23272A];
+    font-family: 'Poppins', sans-serif;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn-primary {
+    @apply bg-[#5865F2] text-white rounded-full px-6 py-3 hover:bg-[#7289DA] transition-colors;
+  }
+  
+  .btn-accent {
+    @apply bg-[#FEE75C] text-[#23272A] rounded-full px-6 py-3 hover:brightness-95 transition-colors;
+  }
 }
