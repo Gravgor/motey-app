@@ -4,6 +4,7 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { EmotePool } from "@/components/home/EmotePool";
 import { Testimonials } from "@/components/home/Testimonials";
 import { FAQ } from "@/components/home/FAQ";
+import { CallToAction } from "@/components/home/CallToAction";
 
 export default function Home() {
   return (
@@ -12,8 +13,8 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <EmotePool />
-      <Testimonials />
       <FAQ />
+      <CallToAction />
     </main>
   );
 }
