@@ -9,6 +9,7 @@ export function HowItWorks() {
     target: containerRef,
     offset: ["start end", "end start"]
   });
+  
 
   const steps = [
     {
