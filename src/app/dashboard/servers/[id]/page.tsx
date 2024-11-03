@@ -1,6 +1,6 @@
 "use client";
 //@ts-nocheck
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { getServerEmotes, deleteEmote, type Emote } from "@/lib/api/emotes";
@@ -9,13 +9,21 @@ import { LoadingSpinner } from "@/components/shared/LoadingSpinner";
 import { toast } from "react-hot-toast";
 import { Trash2 } from "lucide-react";
 
-export default function ServerManage({ params }: { params: { id: string } }) {
+export default function ServerManage({ params }: 
+  { params: Promise<{ id: string }> }) {
   const queryClient = useQueryClient();
   const [isUploading, setIsUploading] = useState(false);
+  const [id, setId] = useState("");
+
+
+  useEffect(() => {
+    params.then((p) => setId(p.id));
+  }, [params]);
+
 
   const { data: emotes, isLoading } = useQuery<Emote[]>({
-    queryKey: ["server-emotes", params.id],
-    queryFn: () => getServerEmotes(params.id)
+    queryKey: ["server-emotes", id],
+    queryFn: () => getServerEmotes(id)
   });
 
   const deleteMutation = useMutation({
@@ -40,7 +48,7 @@ export default function ServerManage({ params }: { params: { id: string } }) {
       {/* Upload Section */}
       <div className="mb-8">
         <EmoteUpload
-          guildId={params.id}
+          guildId={id}
           //@ts-ignore
           onUploadStart={() => setIsUploading(true)}
           //@ts-ignore
